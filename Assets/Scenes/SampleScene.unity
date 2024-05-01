@@ -216,6 +216,11 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &33035200 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2431014732464102467, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &41208225 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7433135635942858631, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
@@ -514,6 +519,11 @@ CapsuleCollider:
   m_Height: 0.001
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &329694564 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8253834175396824361, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &428416207
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,8 +754,8 @@ MonoBehaviour:
   inputDelayInMilliseconds: 0
   fileLocation: we_made_a_chart_pog.mid
   noteTime: 1
-  noteSpawnY: 7
-  noteTapY: 0
+  noteSpawnY: 0
+  noteTapY: -1
 --- !u!4 &487218195
 Transform:
   m_ObjectHideFlags: 0
@@ -818,6 +828,11 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &569067640 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3437703867614539694, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &627441527 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -661621769071590224, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
@@ -875,6 +890,11 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &627441531 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4043160671490604160, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &630458142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1172,6 +1192,11 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &830818618 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3313001059707682152, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1004645383 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
@@ -1189,6 +1214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4792140c78a2af4e82ce53b5a5b4388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathPoints: []
   noteRestriction: 5
   input: 32
   notePrefab: {fileID: 3845671004381867817, guid: 46e6397d24ef5e646a867c99fa8d2364, type: 3}
@@ -1250,6 +1276,11 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &1160274166 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -5824951005627034312, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1280943105 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6339930826437042157, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
@@ -1471,6 +1502,11 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &1588164512 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1514652029883471837, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1593794274 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3999619995188168013, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
@@ -1528,6 +1564,11 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &1593794278 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8383998095812222051, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1709271115 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2128074601334339989, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
@@ -1621,6 +1662,11 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &1709271122 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4901982152012507578, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1748951018
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,6 +1696,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4792140c78a2af4e82ce53b5a5b4388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathPoints:
+  - {fileID: 1709271122}
+  - {fileID: 1588164512}
+  - {fileID: 627441531}
+  - {fileID: 33035200}
+  - {fileID: 1874166019}
+  - {fileID: 2050305848}
+  - {fileID: 1881274694}
+  - {fileID: 830818618}
+  - {fileID: 1920238981}
+  - {fileID: 569067640}
+  - {fileID: 1593794278}
+  - {fileID: 1160274166}
+  - {fileID: 329694564}
   noteRestriction: 5
   input: 32
   notePrefab: {fileID: 5735627210511916628, guid: 46e6397d24ef5e646a867c99fa8d2364, type: 3}
@@ -1856,6 +1916,11 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &1874166019 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -829396546419327616, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1881274690 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6314903070410946669, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
@@ -1913,6 +1978,11 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &1881274694 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8694402863638694312, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1920238977 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7731327272949442977, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
@@ -1970,6 +2040,11 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &1920238981 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2525925399211477908, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2004366892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2155,3 +2230,8 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &2050305848 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1928523797091266021, guid: 1dbb2d6c3851a7e4882aaef4e7e92a7a, type: 3}
+  m_PrefabInstance: {fileID: 666081309}
+  m_PrefabAsset: {fileID: 0}
