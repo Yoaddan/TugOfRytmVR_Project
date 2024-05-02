@@ -3,20 +3,23 @@ using UnityEngine.UI;
 
 public class Note : MonoBehaviour
 {
+    public Material[] materials; // Arreglo de materiales asignados desde el inspector
+    private static int nextMaterialIndex = 0; // Índice estático para seguir el próximo material a usar
     double timeInstantiated;
-    public float assignedTime; // Tiempo asignado para cuando la nota debe ser tocada
-    public RectTransform rhythmIndicator; // UI que indica cuándo tocar la nota
-    private float progress = 0f; // Progreso de la nota desde el inicio al final de la cuerda
-    public float speed = 1f; // Velocidad a la que la nota se mueve a lo largo de la cuerda
-    public Transform[] pathPoints; // Huesos o puntos del camino a seguir
-    public float yOffset = 0.025f; // Desplazamiento vertical para que las notas estén un poco arriba de la cuerda
+    public float assignedTime; // Tiempo en el que la nota debe estar en su posición final
+    public RectTransform rhythmIndicator; // Indicador visual de ritmo
+    public Transform[] pathPoints; // Puntos de la trayectoria de la nota
+    public float yOffset = 0.025f; // Desplazamiento vertical para mantener la nota sobre la cuerda
+    public float earlyArrivalFactor = 0.9f; // La nota llegará al final del recorrido al 90% del tiempo asignado
 
     void Start()
     {
-        timeInstantiated = SongManager.GetAudioSourceTime();
+        GetComponent<Renderer>().material = materials[nextMaterialIndex]; // Obtiene su renderer
+        nextMaterialIndex = (nextMaterialIndex + 1) % materials.Length; // Asegura que el índice siempre sea válido
+        timeInstantiated = SongManager.GetAudioSourceTime(); // Captura el tiempo cuando la nota es instanciada
         if (rhythmIndicator != null)
         {
-            rhythmIndicator.localScale = Vector3.one;
+            rhythmIndicator.localScale = Vector3.one; // Inicia el indicador a escala completa
         }
     }
 
@@ -28,34 +31,36 @@ public class Note : MonoBehaviour
     void UpdateNotePosition()
     {
         double timeSinceInstantiated = SongManager.GetAudioSourceTime() - timeInstantiated;
-        float t = (float)(timeSinceInstantiated / (SongManager.Instance.noteTime * 2)); // Calcular el progreso hacia el tiempo asignado
+        float t = (float)(timeSinceInstantiated / SongManager.Instance.noteTime); // Calcula el progreso basado en el tiempo asignado
+        t = Mathf.Clamp01(t); // Asegura que t se mantenga entre 0 y 1
 
-        if (t > 1)
+        if (t >= 1f)
         {
             Destroy(gameObject); // Destruye la nota si su tiempo ha expirado
         }
         else
         {
-            progress = Mathf.Clamp01(t * speed);
-            if (pathPoints != null && pathPoints.Length > 1)
-            {
-                FollowPath();
-            }
-
+            FollowPath(t, earlyArrivalFactor);
             if (rhythmIndicator != null)
             {
-                rhythmIndicator.localScale = Vector3.one * (1 - t);
+                rhythmIndicator.localScale = Vector3.one * Mathf.Lerp(1f, 0.27f, t);
             }
         }
     }
 
-    void FollowPath()
+    void FollowPath(float t, float earlyArrivalFactor)
     {
         if (pathPoints == null || pathPoints.Length < 2) return;
-        
-        int segment = Mathf.Min((int)(progress * (pathPoints.Length - 1)), pathPoints.Length - 2);
-        float segmentProgress = (progress * (pathPoints.Length - 1)) - segment;
-        Vector3 interpolatedPosition = Vector3.Lerp(pathPoints[segment].position, pathPoints[segment + 1].position, segmentProgress);
-        transform.position = new Vector3(interpolatedPosition.x, interpolatedPosition.y + yOffset, interpolatedPosition.z);
+
+        // Ajuste de 't' para que la nota llegue más rápido al final
+        float adjustedT = Mathf.Clamp01(t / earlyArrivalFactor);
+
+        int pathIndex = Mathf.FloorToInt(adjustedT * (pathPoints.Length - 1));
+        float localT = (adjustedT * (pathPoints.Length - 1)) - pathIndex;
+        Vector3 startPosition = pathPoints[pathIndex].position;
+        Vector3 endPosition = pathPoints[Mathf.Min(pathIndex + 1, pathPoints.Length - 1)].position;
+
+        transform.position = Vector3.Lerp(startPosition, endPosition, localT) + new Vector3(0, yOffset, 0);
     }
 }
+

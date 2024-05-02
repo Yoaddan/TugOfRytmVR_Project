@@ -37,6 +37,7 @@ public class Lane : MonoBehaviour
     {
         if (spawnIndex < timeStamps.Count && SongManager.GetAudioSourceTime() >= timeStamps[spawnIndex] - SongManager.Instance.noteTime)
         {
+            Debug.Log("Spawneo al elemento: "+ spawnIndex);
             SpawnNote();
             spawnIndex++;
         }
@@ -50,12 +51,14 @@ public class Lane : MonoBehaviour
             if (Input.GetKeyDown(input) && Math.Abs(audioTime - timeStamp) < marginOfError)
             {
                 Hit();
+                Debug.Log("Hit on {inputIndex} note");
                 Destroy(notes[inputIndex].gameObject);
                 inputIndex++;
             }
             if (audioTime >= timeStamp + marginOfError)
             {
                 Miss();
+                Debug.Log($"Missed {inputIndex} note");
                 inputIndex++;
             }
         }
