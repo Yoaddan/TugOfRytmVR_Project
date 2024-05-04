@@ -11,6 +11,7 @@ public class Note : MonoBehaviour
     public Transform[] pathPoints; // Puntos de la trayectoria de la nota
     public float yOffset = 0.025f; // Desplazamiento vertical para mantener la nota sobre la cuerda
     public float earlyArrivalFactor = 0.9f; // La nota llegará al final del recorrido al 90% del tiempo asignado
+    public bool collision = false; // Variable para detectar la colision.
 
     void Start()
     {
@@ -43,7 +44,7 @@ public class Note : MonoBehaviour
             FollowPath(t, earlyArrivalFactor);
             if (rhythmIndicator != null)
             {
-                rhythmIndicator.localScale = Vector3.one * Mathf.Lerp(1f, 0.27f, t);
+                rhythmIndicator.localScale = Vector3.one * Mathf.Lerp(1f, 0.23f, t);
             }
         }
     }
@@ -61,6 +62,13 @@ public class Note : MonoBehaviour
         Vector3 endPosition = pathPoints[Mathf.Min(pathIndex + 1, pathPoints.Length - 1)].position;
 
         transform.position = Vector3.Lerp(startPosition, endPosition, localT) + new Vector3(0, yOffset, 0);
+    }
+
+    public void HandleHit()
+    {
+        // Aquí puedes agregar lógica adicional de scoring o efectos
+        Debug.Log("Nota golpeada. Coloco mi variable booleana en True.");
+        collision = true;
     }
 }
 

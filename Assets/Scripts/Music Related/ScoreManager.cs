@@ -7,7 +7,8 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance;
     public AudioSource hitSFX;
     public AudioSource missSFX;
-    public TMPro.TextMeshPro scoreText;
+    public HealthBar healthBar;  // Referencia a la barra de salud
+    public TMPro.TextMeshProUGUI scoreText;
     static int comboScore;
     void Start()
     {
@@ -17,12 +18,13 @@ public class ScoreManager : MonoBehaviour
     public static void Hit()
     {
         comboScore += 1;
-        //Instance.hitSFX.Play();
+        Instance.hitSFX.Play();
     }
     public static void Miss()
     {
         comboScore = 0;
-        //Instance.missSFX.Play();    
+        Instance.missSFX.Play();
+        Instance.healthBar.TakeDamage(1);
     }
     private void Update()
     {

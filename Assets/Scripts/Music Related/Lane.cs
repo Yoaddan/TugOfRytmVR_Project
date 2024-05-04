@@ -42,18 +42,34 @@ public class Lane : MonoBehaviour
             spawnIndex++;
         }
 
-        if (inputIndex < timeStamps.Count)
+        if (inputIndex < timeStamps.Count && inputIndex < notes.Count)
         {
             double timeStamp = timeStamps[inputIndex];
             double marginOfError = SongManager.Instance.marginOfError;
             double audioTime = SongManager.GetAudioSourceTime() - (SongManager.Instance.inputDelayInMilliseconds / 1000.0);
 
-            if (Input.GetKeyDown(input) && Math.Abs(audioTime - timeStamp) < marginOfError)
+            if ( notes[inputIndex].collision || Input.GetKeyDown(input) ) // Verifica su colision y si se hizo en el tiempo adecuado.
             {
-                Hit();
-                Debug.Log("Hit on {inputIndex} note");
-                Destroy(notes[inputIndex].gameObject);
-                inputIndex++;
+                if(Math.Abs(audioTime - timeStamp) < marginOfError) // Verifica su colision y si se hizo en el tiempo adecuado.
+                {
+                    Hit();
+                    Debug.Log($"Hit on {inputIndex} note");
+                    if (notes[inputIndex])  // Esta línea verifica si la nota aún existe y no fue destruida en el momento exacto, para cuando el hit es extremadamente preciso.
+                    {
+                        Destroy(notes[inputIndex].gameObject);
+                    }
+                    inputIndex++;
+                } 
+                else 
+                {
+                    Miss();
+                    Debug.Log($"Missed {inputIndex} note, but tried to hit.");
+                    if (notes[inputIndex])  // Esta línea verifica si la nota aún existe y no fue destruida en el momento exacto, para cuando el hit es extremadamente preciso.
+                    {
+                        Destroy(notes[inputIndex].gameObject);
+                    }
+                    inputIndex++;
+                }
             }
             if (audioTime >= timeStamp + marginOfError)
             {
