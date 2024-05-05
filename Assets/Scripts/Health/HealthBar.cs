@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; 
 
 public class HealthBar : MonoBehaviour
 {
@@ -27,6 +28,22 @@ public class HealthBar : MonoBehaviour
         slider.value -= damage;
         if (slider.value < 0)
             slider.value = 0;
+    }
+
+    // Verificar si la salud es 0 y actuar en consecuencia
+    void Update()
+    {
+        if (slider.value <= 0)
+        {
+            Die();
+        }
+    }
+
+    // Manejar la "muerte" del jugador
+    private void Die()
+    {
+        // Cargar la escena con índice 0
+        SceneManager.LoadScene(0);
     }
 
 }

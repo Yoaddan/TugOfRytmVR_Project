@@ -65,7 +65,7 @@ public class RockMovement : MonoBehaviour
         {
             Debug.Log("Colisioné con el jugador.");
             rockManager.PlayRockDestroySound();
-            healthBar.TakeDamage(25);  // Resta 10 puntos de salud
+            healthBar.TakeDamage(20);  // Resta 20 puntos de salud
             Destroy(gameObject);  // Destruir la roca al colisionar con el jugador
         }
     }

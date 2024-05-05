@@ -6,6 +6,7 @@ using Melanchall.DryWetMidi.Interaction;
 using System.IO;
 using UnityEngine.Networking;
 using System;
+using UnityEngine.SceneManagement; 
 
 public class SongManager : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class SongManager : MonoBehaviour
     public AudioSource audioSource;
     public Lane[] lanes;
     public float songDelayInSeconds;
-    public double marginOfError; // in seconds
+    public double marginOfError; // En segundos
+    private bool songHasStarted = false; // Marca que la canción realmente ha comenzado
+    public GameObject endGameCanvas;  // Referencia al Canvas que contiene el UI del fin del juego
 
     public int inputDelayInMilliseconds;
     
@@ -65,6 +68,7 @@ public class SongManager : MonoBehaviour
     public void StartSong()
     {
         audioSource.Play();
+        songHasStarted = true; // Marca que la canción realmente ha comenzado
     }
     public static double GetAudioSourceTime()
     {
@@ -73,6 +77,19 @@ public class SongManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (songHasStarted && !audioSource.isPlaying)
+        {
+            ShowEndGameCanvas(); // Mostrar el canvas en lugar de cargar la escena
+        }
+    }
+
+    void ShowEndGameCanvas()
+    {
+        endGameCanvas.SetActive(true); // Activar el canvas del fin del juego
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0); // Método llamado por el botón para cargar la escena principal
     }
 }
