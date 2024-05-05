@@ -70,5 +70,11 @@ public class Note : MonoBehaviour
         Debug.Log("Nota golpeada. Coloco mi variable booleana en True.");
         collision = true;
     }
+
+    // Método estático para resetear el índice de material
+    public static void ResetMaterialIndex()
+    {
+        nextMaterialIndex = 0;
+    }
 }
 

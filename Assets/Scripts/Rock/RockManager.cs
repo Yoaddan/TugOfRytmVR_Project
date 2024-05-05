@@ -9,10 +9,11 @@ public class RockManager : MonoBehaviour
     public Lane lane; // Referencia al Lane que contiene los timestamps
     public Transform spawnPoint; // Punto de spawn predefinido
 
-    private List<float> selectedTimestamps = new List<float>(); // Timestamps seleccionados para spawnear rocas
+    private List<float> selectedTimestamps; // Timestamps seleccionados para spawnear rocas
 
     void Start()
     {
+        selectedTimestamps = new List<float>();  // Reinicializar la lista completamente
         StartCoroutine(WaitForTimestamps());
     }
 

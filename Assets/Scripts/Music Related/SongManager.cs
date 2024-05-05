@@ -30,6 +30,7 @@ public class SongManager : MonoBehaviour
     void Start()
     {
         Instance = this;
+        Note.ResetMaterialIndex();  // Resetear el índice antes de iniciar cualquier cosa relacionada con las notas
         StartCoroutine(ReadFromWebsite());
     }
 
