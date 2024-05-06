@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class RockManager : MonoBehaviour
 {
@@ -9,43 +8,37 @@ public class RockManager : MonoBehaviour
     public Lane lane; // Referencia al Lane que contiene los timestamps
     public Transform spawnPoint; // Punto de spawn predefinido
 
-    private List<float> selectedTimestamps; // Timestamps seleccionados para spawnear rocas
-
     void Start()
     {
-        selectedTimestamps = new List<float>();  // Reinicializar la lista completamente
-        StartCoroutine(WaitForTimestamps());
+        Invoke("InitializeRockTimestamps", 0.1f); // Retrasa ligeramente la inicialización para asegurar que todos los sistemas están listos
     }
 
-    IEnumerator WaitForTimestamps()
+    void InitializeRockTimestamps()
     {
-        // Espera hasta que los timestamps estén cargados
-        yield return new WaitUntil(() => lane != null && lane.timeStamps.Count > 2);
-
-        // Proceder con la selección de timestamps y spawnear rocas
-        selectedTimestamps.Add((float)lane.timeStamps[Random.Range(0, lane.timeStamps.Count)]);
-        selectedTimestamps.Add((float)lane.timeStamps[Random.Range(0, lane.timeStamps.Count)]);
-        StartCoroutine(SpawnRocksAtTimestamps());
-    }
-
-    IEnumerator SpawnRocksAtTimestamps()
-    {
-        foreach (var timestamp in selectedTimestamps)
-        {
-            float waitTime = timestamp - Time.time;
-            yield return new WaitForSeconds(waitTime > 0 ? waitTime : 0);
-            SpawnRock();
+        if (lane == null || lane.timeStamps.Count <= 2) {
+            Debug.LogError("Lane no está listo o no tiene suficientes timestamps.");
+            return;
         }
+        
+        // Seleccionar solo dos timestamps aleatorios
+        float randomTimeStamp1 = (float)lane.timeStamps[Random.Range(0, lane.timeStamps.Count)];
+        float randomTimeStamp2 = (float)lane.timeStamps[Random.Range(0, lane.timeStamps.Count)];
+        
+        ScheduleRockSpawn(randomTimeStamp1);
+        ScheduleRockSpawn(randomTimeStamp2);
+    }
+
+    void ScheduleRockSpawn(float delay)
+    {
+        if (delay < 0) delay = 0.1f; // Asegura un mínimo delay para evitar tiempos negativos
+        Invoke("SpawnRock", delay);
     }
 
     void SpawnRock()
     {
-        if (spawnPoint != null)
-        {
-            GameObject rock = Instantiate(rockPrefab, spawnPoint.position, spawnPoint.rotation);
-        }
-        else
-        {
+        if (spawnPoint != null) {
+            Instantiate(rockPrefab, spawnPoint.position, spawnPoint.rotation);
+        } else {
             Debug.LogError("No se ha definido un punto de spawn");
         }
     }
@@ -55,3 +48,4 @@ public class RockManager : MonoBehaviour
         rockDestroySFX.Play();
     }
 }
+

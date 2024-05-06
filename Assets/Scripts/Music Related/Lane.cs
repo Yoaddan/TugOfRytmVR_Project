@@ -21,6 +21,11 @@ public class Lane : MonoBehaviour
         Instance = this;  // Configura la instancia única.
     }
 
+    void Start()
+    {
+        timeStamps.Clear(); // Limpia timestamps.
+    }
+
     public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
     {
         foreach (var note in array)
