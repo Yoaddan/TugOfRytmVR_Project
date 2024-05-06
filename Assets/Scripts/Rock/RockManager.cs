@@ -4,13 +4,24 @@ using System.Collections.Generic;
 public class RockManager : MonoBehaviour
 {
     public GameObject rockPrefab; // Prefab de la roca
+    public SongManager songManager; // Instancia del SongManager.
     public AudioSource rockDestroySFX; // Sonido de destrucción de la roca
     public Lane lane; // Referencia al Lane que contiene los timestamps
     public Transform spawnPoint; // Punto de spawn predefinido
 
     void Start()
     {
-        Invoke("InitializeRockTimestamps", 0.1f); // Retrasa ligeramente la inicialización para asegurar que todos los sistemas están listos
+        if(!songManager.tutorialEnabled)
+            Invoke("InitializeRockTimestamps", 0.1f); // Retrasa ligeramente la inicialización para asegurar que todos los sistemas están listos
+    }
+
+    void Update()
+    {
+        if(songManager.tutorialCompleted)
+        {
+            Invoke("InitializeRockTimestamps", 0.1f); // Retrasa ligeramente la inicialización para asegurar que todos los sistemas están listos
+            songManager.tutorialCompleted = false;
+        }
     }
 
     void InitializeRockTimestamps()

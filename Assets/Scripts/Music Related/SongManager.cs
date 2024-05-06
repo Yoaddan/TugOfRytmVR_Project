@@ -14,9 +14,12 @@ public class SongManager : MonoBehaviour
     public AudioSource audioSource;
     public Lane[] lanes;
     public float songDelayInSeconds;
-    public double marginOfError; // En segundos
-    private bool songHasStarted = false; // Marca que la canción realmente ha comenzado
-    public GameObject endGameCanvas;  // Referencia al Canvas que contiene el UI del fin del juego
+    public double marginOfError; // En segundos.
+    private bool songHasStarted = false; // Marca que la canción realmente ha comenzado.
+    public GameObject endGameCanvas;  // Referencia al Canvas que contiene el UI del fin del juego.
+    public GameObject tutorialCanvas; // Canvas del tutorial.
+    public bool tutorialEnabled = false; // Controla si el tutorial está habilitado.
+    public bool tutorialCompleted = false; // Variable referencia para otras instancias.
 
     public int inputDelayInMilliseconds;
     
@@ -32,6 +35,9 @@ public class SongManager : MonoBehaviour
         Instance = this;
         Note.ResetMaterialIndex();  // Resetear el índice antes de iniciar cualquier cosa relacionada con las notas
         StartCoroutine(ReadFromWebsite());
+        if (tutorialEnabled) {
+            tutorialCanvas.SetActive(true); // Muestra el tutorial si está habilitado
+        } 
     }
 
     private IEnumerator ReadFromWebsite()
@@ -64,13 +70,25 @@ public class SongManager : MonoBehaviour
 
         foreach (var lane in lanes) lane.SetTimeStamps(array);
 
+        if (!tutorialEnabled) // La empieza inmediatamente si esta desactivado el tutorial.
+        {
+            StartSongAfterTutorial();
+        } 
+
+    }
+
+    public void StartSongAfterTutorial()
+    {
+        tutorialCompleted = true;
         Invoke(nameof(StartSong), songDelayInSeconds);
     }
+
     public void StartSong()
     {
         audioSource.Play();
         songHasStarted = true; // Marca que la canción realmente ha comenzado
     }
+
     public static double GetAudioSourceTime()
     {
         return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
@@ -93,4 +111,5 @@ public class SongManager : MonoBehaviour
     {
         SceneManager.LoadScene(0); // Método llamado por el botón para cargar la escena principal
     }
+
 }
