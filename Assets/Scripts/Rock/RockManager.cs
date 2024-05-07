@@ -8,19 +8,23 @@ public class RockManager : MonoBehaviour
     public AudioSource rockDestroySFX; // Sonido de destrucción de la roca
     public Lane lane; // Referencia al Lane que contiene los timestamps
     public Transform spawnPoint; // Punto de spawn predefinido
+    private bool timestampsInitialized = false; // Flag para controlar la inicialización de timestamps.
 
     void Start()
     {
-        if(!songManager.tutorialEnabled)
+        if(!songManager.tutorialEnabled && !timestampsInitialized)
+        {
             Invoke("InitializeRockTimestamps", 0.1f); // Retrasa ligeramente la inicialización para asegurar que todos los sistemas están listos
+            timestampsInitialized = true;
+        }
     }
 
     void Update()
     {
-        if(songManager.tutorialCompleted)
+        if(songManager.tutorialCompleted && !timestampsInitialized)
         {
             Invoke("InitializeRockTimestamps", 0.1f); // Retrasa ligeramente la inicialización para asegurar que todos los sistemas están listos
-            songManager.tutorialCompleted = false;
+            timestampsInitialized = true;
         }
     }
 
